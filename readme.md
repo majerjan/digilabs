@@ -1,46 +1,53 @@
-Nette Web Project
+Digilabs 
 =================
 
-This is a simple, skeleton application using the [Nette](https://nette.org). This is meant to
-be used as a starting point for your new projects.
-
-[Nette](https://nette.org) is a popular tool for PHP web development.
-It is designed to be the most usable and friendliest as possible. It focuses
-on security and performance and is definitely one of the safest PHP frameworks.
-
-If you like Nette, **[please make a donation now](https://nette.org/donate)**. Thank you!
+Testing project
 
 
 Requirements
 ------------
 
-- Web Project for Nette 3.1 requires PHP 8.0
+- PHP 8.1
+- ext: xml, mbstring, zip, unzip, curl, gd
+- composer
 
 
-Installation
+Docker use
 ------------
 
-The best way to install Web Project is using Composer. If you don't have Composer yet,
-download it following [the instructions](https://doc.nette.org/composer). Then use command:
-
-	composer create-project nette/web-project path/to/install
-	cd path/to/install
-
-
-Make directories `temp/` and `log/` writable.
+    cd path/to/project
+    make up
+    
+After building running on localhost:80
 
 
-Web Server Setup
+Local use
 ----------------
 
-The simplest way to get started is to start the built-in PHP server in the root directory of your project:
+Apache: 
 
-	php -S localhost:8000 -t www
+- copy project to apache html
+- add to apache conf
 
-Then visit `http://localhost:8000` in your browser to see the welcome page.
 
-For Apache or Nginx, setup a virtual host to point to the `www/` directory of the project and you
-should be ready to go.
+    <Directory /var/www/html>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+    
+    <IfModule dir_module>
+        DirectoryIndex index.php index.html
+    </IfModule>
+    
+    <FilesMatch \.php$>
+        SetHandler application/x-httpd-php
+    </FilesMatch>
 
-**It is CRITICAL that whole `app/`, `config/`, `log/` and `temp/` directories are not accessible directly
-via a web browser. See [security warning](https://nette.org/security-warning).**
+enable rewrite mode 
+
+    a2enmod rewrite
+
+restart apache
+
+running on localhost:80
