@@ -4,4 +4,9 @@
     <a n:href="Action:default"><button class="actionButton">&#8592;</button></a>
 </div>
 
-<img src="{$imageSrc}" alt="joke">
+{if $imageSrc !== null}
+    <img src="{$imageSrc}" alt="joke">
+{else}
+    <p>Nelze zobrazit</p>
+{/if}
+

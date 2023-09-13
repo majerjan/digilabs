@@ -22,8 +22,13 @@ class DataFacade {
      * @throws GifCreationException
      * @throws \Exception
      */
-    public function getJokeImagePath(): string {
+    public function getJokeImagePath(): ?string {
         $item = $this->dataRepository->getRandomJoke();
+
+        if($item === null) {
+            return null;
+        }
+
         $path = $this->gifCreatorHelper->createGifFilePath($item->getId());
 
         if(file_exists($path) === false) {
