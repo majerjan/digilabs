@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\Helpers;
+namespace Test\Helpers;
 
 use App\Exceptions\InvalidNameException;
 use App\Helpers\StringHelper;
