@@ -10,7 +10,7 @@ use Nette\Utils\FileSystem;
 class ServerResource implements IDataResource {
 
     private const DATA_URL = 'https://www.digilabs.cz/hiring/data.php';
-    private const IMAGE_URL = 'http://example.com/image.php';
+    private const IMAGE_URL = 'https://www.digilabs.cz/hiring/chuck.jpg';
 
     public function getData(): string {
         $ch = curl_init(self::DATA_URL);
