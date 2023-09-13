@@ -2,4 +2,5 @@ log
 temp
 config/local.neon
 .idea
+vendor
 
