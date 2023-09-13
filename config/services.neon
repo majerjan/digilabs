@@ -9,6 +9,7 @@ search:
 services:
 	- App\Router\RouterFactory::createRouter
 
+#   Local or Server use
 	dataResource: App\Resource\LocalResource
 #	dataResource: App\Resource\ServerResource
 

@@ -51,3 +51,10 @@ enable rewrite mode
 restart apache
 
 running on localhost:80
+
+Resource
+----------------
+
+it is possible to change data resource
+
+    config/services.neon

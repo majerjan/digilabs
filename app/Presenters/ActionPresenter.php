@@ -37,6 +37,7 @@ class ActionPresenter extends Presenter{
             $this->flashMessage('Došlo k chybě', 'danger');
         }
 
+        /** @phpstan-ignore-next-line */
         $this->template->imageSrc = $path;
     }
 
