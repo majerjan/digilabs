@@ -1,2 +1,3 @@
 parameters:
     debugMode: true
+    host: localhost

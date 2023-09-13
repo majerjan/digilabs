@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
+use Nette\DI\Config\Loader;
+
 class PathHelper {
 
     public static function getRoot(): string {
@@ -25,8 +27,24 @@ class PathHelper {
         return self::concatPath([self::getRoot(), 'config']);
     }
 
+    public static function getServerDomain(): string {
+        $loader = new Loader();
+        $content = $loader->load(PathHelper::concatPath([self::getConfig(), 'local.neon']));
+
+        if (
+            array_key_exists('parameters', $content) &&
+            array_key_exists('host', $content['parameters'])
+        ) {
+            $domain = $content['parameters']['host'];
+        } else {
+            throw new \Exception();
+        }
+
+        return self::concatPath(['http://', $domain]);
+    }
+
     public static function getServerDomainTemp(): string {
-        return self::concatPath(['http://localhost', 'temp']);
+        return self::concatPath([self::getServerDomain(), 'temp']);
     }
 
     /**
