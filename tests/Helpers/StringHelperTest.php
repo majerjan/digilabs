@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 class StringHelperTest extends TestCase {
 
     /**
-     * @return array<array<int,string>|bool>
+     * @return array<array<int, string|bool>>
      */
     public static function createHaveEqualNameSurnameCharsProvider(): array {
         return [
@@ -47,7 +47,7 @@ class StringHelperTest extends TestCase {
     }
 
     /**
-     * @return array<array<int,string>|bool>
+     * @return array<array<int,string|bool>>
      */
     public static function createHaveEqualNameSurnameCharsExceptionProvider(): array {
         return [
@@ -71,7 +71,9 @@ class StringHelperTest extends TestCase {
         $helper->haveEqualNameSurnameChars($name, $onlyFirstName, $caseSensitive);
     }
 
-
+    /**
+     * @return array<array<int,string|bool>>
+     */
     public static function createHaveEqualEquationProvider(): array {
         return [
             ['20 - 47 = -27', true],

@@ -18,19 +18,15 @@ class DataRepository {
     ) {
     }
 
-    public function getById(int $id) {
-        $dataItems = $this->dataDecoder->load($this->resource);
-
-        foreach ($dataItems as $item) {
-            if($item->getId() === $id) return $item;
-        }
-
-        return null;
-    }
-
     public function getRandomJoke(): DataItemDto {
         $dataItems = $this->dataDecoder->load($this->resource);
-        $random = random_int(array_key_first($dataItems), array_key_last($dataItems));
+        $min = array_key_first($dataItems);
+        $max = array_key_last($dataItems);
+
+        assert(is_int($min));
+        assert(is_int($max));
+
+        $random = random_int($min, $max);
 
         return $dataItems[$random];
     }
@@ -87,8 +83,7 @@ class DataRepository {
     public function getByMonth(): array {
         $out = [];
         $dataItems = $this->dataDecoder->load($this->resource);
-        $now = new \DateTimeImmutable();
-        $now->setTime(0,0,0);
+        $now = (new \DateTimeImmutable())->setTime(0,0,0);
 
         $from = $now->modify('-1 month');
         $to = $now->modify('+1 month');

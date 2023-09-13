@@ -30,19 +30,19 @@ class ActionPresenter extends Presenter{
         $this->template->imageSrc = $this->dataFacade->getJokeImagePath();
     }
 
-    public function createComponentNameGrid($name): DataGrid {
+    public function createComponentNameGrid(string $name): DataGrid {
         return $this->createDateGridAndSource($this->dataRepository->getSameFirstLetter(false));
     }
 
-    public function createComponentDivisionGrid($name): DataGrid {
+    public function createComponentDivisionGrid(string $name): DataGrid {
         return $this->createDateGridAndSource($this->dataRepository->getCountEqual());
     }
 
-    public function createComponentDateGrid($name): DataGrid {
+    public function createComponentDateGrid(string $name): DataGrid {
         return $this->createDateGridAndSource($this->dataRepository->getByMonth());
     }
 
-    public function createComponentCalculationGrid($name): DataGrid {
+    public function createComponentCalculationGrid(string $name): DataGrid {
         return $this->createDateGridAndSource($this->dataRepository->getCalculation());
     }
 

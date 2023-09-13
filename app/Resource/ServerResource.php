@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace App\Resource;
 
-use App\Resource\IDataResource;
+use App\Helpers\PathHelper;
 use Nette\Utils\FileSystem;
+
 
 class ServerResource implements IDataResource {
 
@@ -12,8 +13,10 @@ class ServerResource implements IDataResource {
     private const IMAGE_URL = 'http://example.com/image.php';
 
     public function getData(): string {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, self::DATA_URL);
+        $ch = curl_init(self::DATA_URL);
+
+        assert($ch instanceof \CurlHandle);
+
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -28,16 +31,24 @@ class ServerResource implements IDataResource {
     }
 
     public function getImagePath(): string {
-//        $file = FileSystem::open(__DIR__. '/../../source/image.jpg', 'w');
-//        $ch = curl_init(self::IMAGE_URL);
-//
-//        curl_setopt($ch, CURLOPT_FILE, $file);
-//        curl_setopt($ch, CURLOPT_HEADER, 0);
-//        curl_exec($ch);
-//        curl_close($ch);
-//
-//        return $file;
-        return '';
+        $path = PathHelper::concatPath([PathHelper::getTemp(), 'image.jpg']);
+        $ch = curl_init(self::IMAGE_URL);
+
+        assert($ch instanceof \CurlHandle);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+
+        $response = curl_exec($ch);
+
+        curl_close($ch);
+
+        $this->handleUnexpectedResponse($response);
+        assert(is_string($response));
+
+        FileSystem::write($path, $response);
+
+        return $path;
     }
 
 

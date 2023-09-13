@@ -17,12 +17,15 @@ class GifCreatorHelper {
 
     public function createGifFromJpeg(IDataResource $resource, DataItemDto $item): bool {
         $image = imagecreatefromjpeg($resource->getImagePath());
-        list($width, $height) = getimagesize($resource->getImagePath());
+        $size = getimagesize($resource->getImagePath());
         list($upLines, $downLines) = $this->splitToHalfAndExplode($item->getJoke());
         $x = $y = self::PADDING;
 
+        assert($image instanceof \GdImage);
+        assert(is_array($size));
+
         $this->print($image, $x, $y, $upLines);
-        $this->print($image, $x, $this->getYDownPosition($height, count($downLines)), $downLines);
+        $this->print($image, $x, $this->getYDownPosition($size[1], count($downLines)), $downLines);
 
         $response = imagegif($image, $this->createGifFilePath($item->getId()));
 
@@ -31,7 +34,7 @@ class GifCreatorHelper {
         return $response;
     }
 
-    public function createGifFileName($id): string {
+    public function createGifFileName(int $id): string {
         return sprintf('%d%s', $id, '.gif');
     }
 
@@ -39,8 +42,11 @@ class GifCreatorHelper {
         return PathHelper::concatPath([PathHelper::getTemp(), $this->createGifFileName($id)]);
     }
 
+    /**
+     * @param string[] $lines
+     */
     public function print(
-        $image,
+        \GdImage $image,
         int $x,
         int $y,
         array $lines
@@ -66,7 +72,7 @@ class GifCreatorHelper {
 
     public function getYDownPosition(
         int $height,
-        $linesCount
+        int $linesCount
     ): int {
         return $height - (self::PADDING + $linesCount * self::LINE_HEIGHT);
     }

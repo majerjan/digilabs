@@ -59,7 +59,8 @@ class StringHelper {
 
             $actual = match ($operator){
                 Operators::PLUS, null => $actual + $number,
-                Operators::MINUS => $actual - $number
+                Operators::MINUS => $actual - $number,
+                default => $actual
             };
         }
 
@@ -70,7 +71,7 @@ class StringHelper {
     /**
      * @return string[]
      */
-    private function getFirstChars($name): array {
+    private function getFirstChars(string $name): array {
         $chars = [];
 
         preg_match_all('/[A-z]+/', $name, $matches, PREG_SET_ORDER);
