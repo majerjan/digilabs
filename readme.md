@@ -11,6 +11,9 @@ Requirements
 - ext: xml, mbstring, zip, unzip, curl, gd
 - composer
 
+Set up
+------------
+use local.neon.example as an example and create local.neon
 
 Docker use
 ------------
