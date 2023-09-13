@@ -18,6 +18,10 @@ class DataRepository {
     ) {
     }
 
+    /**
+     * @return DataItemDto
+     * @throws \Exception
+     */
     public function getRandomJoke(): DataItemDto {
         $dataItems = $this->dataDecoder->load($this->resource);
         $min = array_key_first($dataItems);
@@ -34,6 +38,7 @@ class DataRepository {
     /**
      * @return DataItemDto[]
      * @throws InvalidNameException
+     * @throws \Exception
      */
     public function getSameFirstLetter(
         bool $onlyFirstName,

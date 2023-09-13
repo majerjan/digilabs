@@ -18,6 +18,10 @@ class DataFacade {
     ) {
     }
 
+    /**
+     * @throws GifCreationException
+     * @throws \Exception
+     */
     public function getJokeImagePath(): string {
         $item = $this->dataRepository->getRandomJoke();
         $path = $this->gifCreatorHelper->createGifFilePath($item->getId());

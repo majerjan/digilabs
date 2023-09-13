@@ -7,9 +7,10 @@ namespace App\Presenters;
 use App\Components\DataGrid;
 use App\Components\IDataGridFactory;
 use App\Dto\DataItemDto;
+use App\Exceptions\GifCreationException;
+use App\Exceptions\InvalidNameException;
 use App\Facades\DataFacade;
 use App\Helpers\DataLoaderHelper;
-use App\Helpers\PathHelper;
 use App\Repositories\DataRepository;
 use Nette\Application\UI\Presenter;
 use Tracy\Debugger;
@@ -27,23 +28,68 @@ class ActionPresenter extends Presenter{
     }
 
     public function actionJoke(): void {
-        $this->template->imageSrc = $this->dataFacade->getJokeImagePath();
+        $path = '';
+
+        try {
+            $path = $this->dataFacade->getJokeImagePath();
+        } catch (GifCreationException|\Exception $exception) {
+            Debugger::log($exception);
+            $this->flashMessage('Došlo k chybě', 'danger');
+        }
+
+        $this->template->imageSrc = $path;
     }
 
     public function createComponentNameGrid(string $name): DataGrid {
-        return $this->createDateGridAndSource($this->dataRepository->getSameFirstLetter(false));
+        $data = [];
+
+        try {
+            $data = $this->dataRepository->getSameFirstLetter(false);
+        } catch (InvalidNameException|\Exception $exception) {
+            Debugger::log($exception);
+            $this->flashMessage('Došlo k chybě', 'danger');
+        }
+
+        return $this->createDateGridAndSource($data);
     }
 
     public function createComponentDivisionGrid(string $name): DataGrid {
-        return $this->createDateGridAndSource($this->dataRepository->getCountEqual());
+        $data = [];
+
+        try {
+            $data = $this->dataRepository->getCountEqual();
+        } catch (\Exception $exception) {
+            Debugger::log($exception);
+            $this->flashMessage('Došlo k chybě', 'danger');
+        }
+
+        return $this->createDateGridAndSource($data);
     }
 
     public function createComponentDateGrid(string $name): DataGrid {
-        return $this->createDateGridAndSource($this->dataRepository->getByMonth());
+        $data = [];
+
+        try {
+            $data = $this->dataRepository->getByMonth();
+        } catch (\Exception $exception) {
+            Debugger::log($exception);
+            $this->flashMessage('Došlo k chybě', 'danger');
+        }
+
+        return $this->createDateGridAndSource($data);
     }
 
     public function createComponentCalculationGrid(string $name): DataGrid {
-        return $this->createDateGridAndSource($this->dataRepository->getCalculation());
+        $data = [];
+
+        try {
+            $data = $this->dataRepository->getCalculation();
+        } catch (\Exception $exception) {
+            Debugger::log($exception);
+            $this->flashMessage('Došlo k chybě', 'danger');
+        }
+
+        return $this->createDateGridAndSource($data);
     }
 
     /**
