@@ -1,0 +1,10 @@
+services:
+  digilabs:
+    container_name: digilabs
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./../:/var/www/html/
+    ports:
+      - 80:80

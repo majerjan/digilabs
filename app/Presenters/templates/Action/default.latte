@@ -1,0 +1,34 @@
+{block content}
+
+    <h1>Testovací zadání</h1>
+    <h2>PHP Developer – DigiLabs Software</h2>
+
+    <p>Vytvořte aplikaci, která bude provádět operace nad daty získanými na následující URL adrese: https://www.digilabs.cz/hiring/data.php</p>
+    <p>Zadání zpracujte za využití PHP 8.1 (Nette) a pro předání využijte veřejný GIT repozitář včetně přiložení readme souboru s instrukcemi, jak aplikaci zprovoznit.</p>
+    <p>Aplikace bude obsahovat tlačítka, které když se potvrdí, provede se jedna z následujících akcí:</p>
+
+    <div class="actionSection">
+        <h3>Akce 1</h3>
+        <p>Náhodné vybrání jednoho z vtipů o Chucku Norrisovi (atribut "joke"), jehož délka nepřesahuje 120 znaků a jeho zobrazení ve formě meme, a to takovým způsobem, že první polovina vtipu bude zobrazení ve vrchní části obrázku a druhá polovina ve spodní. Jako obrázek meme použijte: https://www.digilabs.cz/hiring/chuck.jpg</p>
+        <a n:href="Action:joke"><button class="actionButton">Akce 1</button></a>
+    </div>
+    <div class="actionSection">
+        <h3>Akce 2</h3>
+        <p>Vyfiltrování a prezentace všech záznamů, kterým jejichž křestní jméno a příjmení začínají na jedno a to samé písmeno – iniciály (atribut "name").</p>
+        <a n:href="Action:name"><button class="actionButton">Akce 2</button></a>
+    </div>
+    <div class="actionSection">
+        <h3>Akce 3</h3>
+        <p>Vyfiltrování a prezentace všech záznamů, které mají správně výpočet "firstNumber" / "secondNumber" = "thirdNumber" a zároveň je "firstNumber" sudé.</p>
+        <a n:href="Action:division"><button class="actionButton">Akce 3</button></a>
+    </div>
+    <div class="actionSection">
+        <h3>Akce 4</h3>
+        <p>Vyfiltrování a prezentace všech záznamů, které mají atribut "createdAt" v intervalu -1 a +1 měsíc od aktuálního data.</p>
+        <a n:href="Action:date"><button class="actionButton">Akce 4</button></a>
+    </div>
+    <div class="actionSection">
+        <h3>Akce 5 – výzva</h3>
+        <p>Vyfiltrování a prezentace všech záznamů, které mají správný výpočet v atributu "calculation" – bez použití funkce "eval()".</p>
+        <a n:href="Action:calculation"><button class="actionButton">Akce 5</button></a>
+    </div>

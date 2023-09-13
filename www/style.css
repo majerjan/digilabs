@@ -1,0 +1,21 @@
+.returnWrap a {
+    display: block;
+    margin: 1em;
+}
+
+.defaultWrap {
+    width: 80%;
+    margin: 3em 10% 3em 10%;
+}
+
+.actionSection {
+    margin: 3em 0 0 0;
+}
+
+.actionButton {
+    border-radius: 2em;
+    border: 1px solid grey;
+    color: white;
+    background-color: cornflowerblue;
+    padding: 0.2em 0.5em;
+}

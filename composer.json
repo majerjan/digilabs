@@ -1,0 +1,30 @@
+{
+    "name": "digilabs/nette",
+    "description": "test",
+    "scripts": {
+        "tests": "./vendor/bin/phpunit tests",
+        "stan": "./vendor/bin/phpstan analyse -c phpstan.neon"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "Tests\\": "tests"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jan Majer"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "nette/nette": "^3.2",
+        "ext-curl": "*",
+        "ext-gd": "*",
+        "ublaboo/datagrid": "dev-master"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.3"
+    }
+}

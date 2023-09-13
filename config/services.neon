@@ -1,0 +1,23 @@
+search:
+	-
+		in: %appDir%
+		classes:
+			- *Factory
+			- *Facade
+
+
+services:
+	- App\Router\RouterFactory::createRouter
+
+	dataResource: App\Resource\LocalResource
+#	dataResource: App\Resource\ServerResource
+
+	- App\Helpers\StringHelper
+	- App\Helpers\DataLoaderHelper
+	- App\Helpers\GifCreatorHelper
+
+	- App\Repositories\DataRepository(@dataResource)
+
+	- App\Facades\DataFacade(@dataResource)
+
+	- App\Components\IDataGridFactory
